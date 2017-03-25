@@ -26,7 +26,7 @@ sudo apt-get install -y git # theorically already done
 # git config --global user.email "pi@jarvis"
 
 # mongo
-sudo apt-get install -y mongodb-server
+#sudo apt-get install -y mongodb-server
 
 # for music
 sudo apt-get install -y mpg123 amixer network-manager
