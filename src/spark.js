@@ -8,14 +8,6 @@ if (process.env.NODE_ENV !== 'production') {
     dotenv.config()
 }
 
-let devices = [
-    {
-        name: 'nexus',
-        ip: '192.168.1.10',
-        isPresent: null
-    }
-]
-
 let presence = new Presence({
     interval: 5 * 1000
 })

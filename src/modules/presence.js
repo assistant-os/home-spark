@@ -15,6 +15,7 @@ class Presence extends EventEmitter {
 
     addDevice (device) {
         this.devices.push(device)
+        device.timeoutCount = 0
     }
 
     check () {
@@ -32,6 +33,42 @@ class Presence extends EventEmitter {
                 }
             })
         }
+    }
+
+    checkDevice (device) {
+        ping.sys.probe(device.ip, (isAlive) => {
+            let isPresent = isAlive
+            let previousIsPresent = device.isPresent
+
+            if (device.isPresent !== null) {
+                if (isPresent && isPresent !== device.isPresent) {
+                    device.isPresent = isPresent
+                    device.timeoutCount = 0
+                    this.emit('device-presence-changed', {
+                        device: device,
+                        previous: previousIsPresent
+                    })
+                } else if (!isPresent) {
+                    device.timeoutCount = device.timeoutCount + 1
+
+                    if (device.timeoutCount === 3) {
+                        device.isPresent = false
+                        device.timeoutCount = 0
+                        this.emit('device-presence-changed', {
+                            device: device,
+                            previous: previousIsPresent
+                        })
+                    }
+                }
+            }
+
+            // if (isPresent !== previousIsPresent && previousIsPresent !== null) {
+            //     this.emit('device-presence-changed', {
+            //         device: device,
+            //         previous: previousIsPresent
+            //     })
+            // }
+        })
     }
 
     watch () {
