@@ -1,6 +1,7 @@
 import io from 'socket.io-client'
 import dotenv from 'dotenv'
 import winston from 'winston'
+import path from 'path'
 
 import Presence from './modules/presence'
 import music from './modules/music'
@@ -39,7 +40,7 @@ socket.on('connect', () => {
 
     socket.on('start-music', () => {
       winston.info('start-music')
-      music.play(process.env.MUSIC)
+      music.play(path.join(__dirname, '../', process.env.MUSIC))
     })
 
     socket.on('stop-music', () => {
