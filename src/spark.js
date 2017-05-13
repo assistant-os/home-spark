@@ -38,10 +38,12 @@ socket.on('connect', () => {
     })
 
     socket.on('start-music', () => {
+      winston.info('start-music')
       music.start(process.env.MUSIC)
     })
 
     socket.on('stop-music', () => {
+      winston.info('stop-music')
       music.stop()
     })
 })
