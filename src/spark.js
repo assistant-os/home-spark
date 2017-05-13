@@ -55,7 +55,8 @@ socket.on('connect', () => {
         let interval = setInterval(() => {
           volume += pitch
           music.setVolume(volume)
-          if (volume >= 90) {
+          winston.info('setVolume', volume)
+          if (volume >= 100) {
             clearInterval(interval)
           }
         }, intervalTimeout)
