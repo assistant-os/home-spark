@@ -4,8 +4,11 @@ let p = null
 
 let isPlaying = false
 
+let volume = 0
+
 const setVolume = (value) => {
   spawn('amixer', [ 'set', '"PCM"', `${value}%` ])
+  volume = value
 }
 
 const play = (filename) => {
@@ -20,8 +23,13 @@ const stop = () => {
   }
 }
 
+setVolume(50)
+
 export default {
   play,
   stop,
-  setVolume
+  setVolume,
+  getVolume: () => {
+    return volume
+  }
 }

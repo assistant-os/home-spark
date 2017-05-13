@@ -38,14 +38,35 @@ socket.on('connect', () => {
         winston.info('behavior-ready', { behaviors: behaviors })
     })
 
-    socket.on('start-music', () => {
+    socket.on('start-music', ({ progressive }) => {
       winston.info('start-music')
+      music.setVolume(0)
+      if (progressive) {
+        let volume = 0
+        let interval = setInterval(() => {
+          volume += 1
+          music.setVolume(volume)
+          if (volume === 100) {
+            clearInterval(interval)
+          }
+        }, 150)
+      }
       music.play(path.join(__dirname, '../', process.env.MUSIC))
     })
 
-    socket.on('stop-music', () => {
+    socket.on('stop-music', ({ progressive }) => {
       winston.info('stop-music')
       music.stop()
+    })
+
+    socket.on('volume-up', () => {
+      winston.info('volume-up')
+      music.setVolume(music.getVolume() + 20)
+    })
+
+    socket.on('volume-down', () => {
+      winston.info('volume-down')
+      music.setVolume(music.getVolume() - 20)
     })
 })
 
