@@ -8,12 +8,12 @@ const setVolume = (value) => {
   spawn('amixer', [ 'set', '"PCM"', `${value}%` ])
 }
 
-const play (filename) => {
+const play = (filename) => {
   p = spawn('mpg123', [filename])
   isPlaying = true
 }
 
-const stop () => {
+const stop = () => {
   if (null !== p) {
     p.kill('SIGKILL')
     isPlaying = false
