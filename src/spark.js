@@ -39,7 +39,7 @@ socket.on('connect', () => {
 
     socket.on('start-music', () => {
       winston.info('start-music')
-      music.start(process.env.MUSIC)
+      music.play(process.env.MUSIC)
     })
 
     socket.on('stop-music', () => {
