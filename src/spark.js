@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import winston from 'winston'
 
 import Presence from './modules/presence'
+import music from './modules/music'
 
 if (process.env.NODE_ENV !== 'production') {
     dotenv.config()
@@ -34,7 +35,14 @@ socket.on('connect', () => {
             }
         }
         winston.info('behavior-ready', { behaviors: behaviors })
+    })
 
+    socket.on('start-music', () => {
+      music.start(process.env.MUSIC)
+    })
+
+    socket.on('stop-music', () => {
+      music.stop()
     })
 })
 
