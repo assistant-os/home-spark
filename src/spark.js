@@ -55,7 +55,7 @@ socket.on('connect', () => {
         let interval = setInterval(() => {
           volume += pitch
           music.setVolume(volume)
-          if (volume === 80) {
+          if (volume >= 90) {
             clearInterval(interval)
           }
         }, intervalTimeout)
