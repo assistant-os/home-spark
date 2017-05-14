@@ -79,7 +79,7 @@ socket.on('connect', () => {
       music.setVolume(music.getVolume() - 20)
     })
 })
-
+/*
 presence.watch()
 
 presence.on('device-presence-changed', ({ device, previous }) => {
@@ -94,4 +94,4 @@ presence.on('device-presence-changed', ({ device, previous }) => {
         }
     })
     winston.info('device-presence-changed', { name: device.name, previous: previous, new:device.isPresent })
-})
+})*/
