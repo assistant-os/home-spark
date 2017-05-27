@@ -41,6 +41,7 @@ socket.on('connect', () => {
     socket.on('start-music', ({ speed }) => {
       winston.info('start-music')
       music.setVolume(0)
+      music.play(path.join(__dirname, '../', process.env.MUSIC))
       if (speed !== 'none') {
         let volume = 0
         let intervalTimeout = 100
@@ -52,16 +53,16 @@ socket.on('connect', () => {
         } else if (speed === 'slow') {
           intervalTimeout = 250
         }
+
         let interval = setInterval(() => {
           volume += pitch
           music.setVolume(volume)
           winston.info('setVolume', volume)
-          if (volume >= 100) {
+          if (volume >= 90) {
             clearInterval(interval)
           }
         }, intervalTimeout)
       }
-      music.play(path.join(__dirname, '../', process.env.MUSIC))
     })
 
     socket.on('stop-music', ({ speed }) => {
@@ -71,12 +72,12 @@ socket.on('connect', () => {
 
     socket.on('volume-up', () => {
       winston.info('volume-up')
-      music.setVolume(music.getVolume() + 20)
+      music.setVolume(music.getVolume() + 5)
     })
 
     socket.on('volume-down', () => {
       winston.info('volume-down')
-      music.setVolume(music.getVolume() - 20)
+      music.setVolume(music.getVolume() - 5)
     })
 })
 /*
