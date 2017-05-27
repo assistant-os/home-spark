@@ -14,6 +14,7 @@ const setVolume = (value) => {
 const play = (filename) => {
   p = spawn('mpg123', [filename])
   isPlaying = true
+  console.log(p)
 }
 
 const stop = () => {
