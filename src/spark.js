@@ -40,7 +40,7 @@ socket.on('connect', () => {
 
     socket.on('start-music', ({ speed }) => {
       winston.info('start-music')
-      music.setVolume(70)
+      music.setVolume(80)
       music.play(path.join(__dirname, '../', process.env.MUSIC))
       // if (speed !== 'none') {
       //   let volume = 0
